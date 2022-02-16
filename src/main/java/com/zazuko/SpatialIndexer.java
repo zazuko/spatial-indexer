@@ -9,7 +9,7 @@ import org.apache.jena.query.Dataset;
 import org.apache.jena.tdb2.TDB2Factory;
 
 public class SpatialIndexer {
-  private static final int EXIT_ERROR = 1;
+  private static final int EXIT_FAILURE = 1;
 
   /**
    * Setup Spatial Index using Dataset and most frequent SRS URI in Dataset.
@@ -37,7 +37,7 @@ public class SpatialIndexer {
       setupSpatialIndexWithoutSrsUri(dataset, file);
     } catch (SpatialIndexException e) {
       System.err.println(e);
-      System.exit(EXIT_ERROR);
+      System.exit(EXIT_FAILURE);
     }
   }
 }
