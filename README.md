@@ -30,3 +30,12 @@ Supported options:
 - `--dataset`, `-d`: path to the dataset (required)
 - `--index`, `-i`: path to the spatial index file to generate (required)
 - `--srs`, `-s`: manually set a SRS URI, by default, it will take the one that is the most present in the dataset or use CRS84 as a fallback
+
+## Docker image
+
+The Docker image is configurable using the following environment variables:
+
+- `JAVA_OPTIONS`: add some Java options (default: _empty_)
+- `SRS_URI`: specify a SRS URI to use (default: _empty_)
+- `DATASET_PATH`: path to the dataset (default: `/databases/ds`)
+- `SPATIAL_INDEX_FILE_PATH`: path to the spatial index file to generate (default: `/databases/ds/spatial.index`)
