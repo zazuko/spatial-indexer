@@ -9,8 +9,11 @@ import org.apache.jena.query.Dataset;
 import org.apache.jena.tdb2.TDB2Factory;
 
 public class SpatialIndexer {
+  private static final int EXIT_ERROR = 1;
+
   /**
    * Setup Spatial Index using Dataset and most frequent SRS URI in Dataset.
+   * When no SRS URI can be found, CRS84 will be used instead.
    * Spatial Index written to file once created.
    *
    * @param dataset
@@ -33,8 +36,8 @@ public class SpatialIndexer {
     try {
       setupSpatialIndexWithoutSrsUri(dataset, file);
     } catch (SpatialIndexException e) {
-      System.out.println(e);
-      System.out.println("ko");
+      System.err.println(e);
+      System.exit(EXIT_ERROR);
     }
   }
 }
