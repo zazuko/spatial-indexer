@@ -1,4 +1,4 @@
-package com.zazuko;
+package com.zazuko.spatialindexer;
 
 import static org.junit.Assert.assertTrue;
 
