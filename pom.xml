@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>spatialindexer</name>
-  <url>https://zazuko.com/</url>
+  <url>https://github.com/zazuko/spatial-indexer</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
