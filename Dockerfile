@@ -28,12 +28,6 @@ ARG OPENJDK_VERSION
 WORKDIR /app
 RUN apk add --no-cache "openjdk${OPENJDK_VERSION}"
 
-# Run as this user
-# -H: no home directorry
-# -D: no password
-# -u: explicit UID
-RUN adduser -H -D -u 1000 spatialindex spatialindex
-
 WORKDIR /app
 
 COPY --from=builder /build/spatialindexer.jar .
@@ -47,8 +41,7 @@ ENV \
   DATASET_PATH="/databases/ds" \
   SPATIAL_INDEX_FILE_PATH="/databases/ds/spatial.index"
 
-RUN mkdir -p "/databases/ds" && chown -R 1000:1000 /databases
-USER 1000
+RUN mkdir -p "/databases/ds"
 
 ENTRYPOINT [ "/app/entrypoint.sh" ]
 CMD []
