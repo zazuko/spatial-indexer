@@ -59,10 +59,20 @@ public class SpatialIndexer {
         .argName("index")
         .build();
 
+    final Option srsUri = Option
+        .builder("s")
+        .longOpt("srs")
+        .desc("SRS URI")
+        .hasArg(true)
+        .required(false)
+        .argName("srs")
+        .build();
+
     final Options options = new Options();
     options
         .addOption(dataset)
-        .addOption(spatialIndexFile);
+        .addOption(spatialIndexFile)
+        .addOption(srsUri);
 
     return options;
   }
@@ -83,11 +93,16 @@ public class SpatialIndexer {
     final String datasetPath = line.getOptionValue("dataset");
     final String spatialIndexFilePath = line.getOptionValue("index");
 
-    final File file = new File(spatialIndexFilePath);
+    final File spatialIndexFile = new File(spatialIndexFilePath);
     final Dataset dataset = TDB2Factory.connectDataset(datasetPath);
 
     try {
-      setupSpatialIndexWithoutSrsUri(dataset, file);
+      if (line.hasOption("srs")) {
+        final String srsUri = line.getOptionValue("srs");
+        GeoSPARQLConfig.setupSpatialIndex(dataset, srsUri, spatialIndexFile);
+      } else {
+        setupSpatialIndexWithoutSrsUri(dataset, spatialIndexFile);
+      }
     } catch (SpatialIndexException e) {
       System.err.println(e);
       System.exit(EXIT_FAILURE);

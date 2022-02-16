@@ -27,5 +27,6 @@ You can edit the paths with some specific values.
 
 Supported options:
 
-- `--dataset`, `-d`: path to the dataset
-- `--index`, `-i`: path to the spatial index file to generate
+- `--dataset`, `-d`: path to the dataset (required)
+- `--index`, `-i`: path to the spatial index file to generate (required)
+- `--srs`, `-s`: manually set a SRS URI, by default, it will take the one that is the most present in the dataset or use CRS84 as a fallback
