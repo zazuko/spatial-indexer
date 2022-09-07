@@ -16,7 +16,7 @@
     <maven.compiler.target>1.7</maven.compiler.target>
 
     <!-- dependencies versions -->
-    <jena.version>4.6.0</jena.version>
+    <jena.version>4.5.0</jena.version>
     <slf4j.version>2.0.0</slf4j.version>
     <junit.version>4.13.2</junit.version>
     <cli.version>1.5.0</cli.version>
