@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1.2
 
 # manage base versions
-ARG ALPINE_VERSION="3.15"
-ARG MAVEN_VERSION="3.8.4"
-ARG OPENJDK_VERSION="17"
+ARG ALPINE_VERSION="3.16"
+ARG MAVEN_VERSION="3.8.6"
+ARG OPENJDK_VERSION="18"
 
 
 ##################################
@@ -26,7 +26,7 @@ FROM --platform=${TARGETPLATFORM} "docker.io/library/alpine:${ALPINE_VERSION}"
 ARG OPENJDK_VERSION
 
 WORKDIR /app
-RUN apk add --no-cache "openjdk${OPENJDK_VERSION}"
+RUN apk add --no-cache openjdk17
 
 WORKDIR /app
 
