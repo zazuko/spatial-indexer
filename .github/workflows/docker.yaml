@@ -2,14 +2,15 @@ name: Build and push Docker image
 
 on:
   push:
-    branches:
-      - "**"
     tags:
       - "v*.*.*"
 
 jobs:
   docker:
     runs-on: ubuntu-latest
+
+    env:
+      DOCKER_IMAGE: ghcr.io/zazuko/spatial-indexer
 
     steps:
       - name: Checkout
@@ -29,12 +30,18 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker meta
-        uses: zazuko/action-docker-meta@main
         id: docker_meta
+        uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/zazuko/spatial-indexer
+          images: "${{ env.DOCKER_IMAGE }}"
+          tags: |
+            type=ref,event=branch
+            type=semver,prefix=v,pattern={{version}}
+            type=semver,prefix=v,pattern={{major}}.{{minor}}
+            type=semver,prefix=v,pattern={{major}}
+            type=sha
 
-      - name: Build and push Docker images
+      - name: Build and push Docker image
         id: docker_build
         uses: docker/build-push-action@v6
         with:
@@ -46,3 +53,5 @@ jobs:
           platforms: |
             linux/amd64
             linux/arm64/v8
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
