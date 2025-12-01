@@ -29,9 +29,10 @@ public class SpatialIndexer {
   private static final void setupSpatialIndexWithoutSrsUri(Dataset dataset, File spatialIndexFile)
       throws SpatialIndexException {
     try {
-      GeoSPARQLConfig.setupSpatialIndex(dataset, spatialIndexFile);
+      GeoSPARQLConfig.setupSpatialIndex(dataset, spatialIndexFile.toPath());
     } catch (SrsException _e) {
-      GeoSPARQLConfig.setupSpatialIndex(dataset, "http://www.opengis.net/def/crs/OGC/1.3/CRS84", spatialIndexFile);
+      GeoSPARQLConfig.setupSpatialIndex(dataset, "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+          spatialIndexFile.toPath());
     }
   }
 
@@ -99,7 +100,7 @@ public class SpatialIndexer {
     try {
       if (line.hasOption("srs")) {
         final String srsUri = line.getOptionValue("srs");
-        GeoSPARQLConfig.setupSpatialIndex(dataset, srsUri, spatialIndexFile);
+        GeoSPARQLConfig.setupSpatialIndex(dataset, srsUri, spatialIndexFile.toPath());
       } else {
         setupSpatialIndexWithoutSrsUri(dataset, spatialIndexFile);
       }

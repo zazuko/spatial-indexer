@@ -1,15 +1,15 @@
 # syntax=docker/dockerfile:1.2
 
 # manage base versions
-ARG ALPINE_VERSION="3.16"
-ARG MAVEN_VERSION="3.8.6"
-ARG OPENJDK_VERSION="18"
+ARG ALPINE_VERSION="3.22.2"
+ARG MAVEN_VERSION="3.9.11"
+ARG OPENJDK_VERSION="21"
 
 
 ##################################
 # Build the Spatial Indexer tool #
 ##################################
-FROM --platform=${BUILDPLATFORM} "docker.io/library/maven:${MAVEN_VERSION}-openjdk-${OPENJDK_VERSION}-slim" AS builder
+FROM --platform=${BUILDPLATFORM} "docker.io/library/maven:${MAVEN_VERSION}-eclipse-temurin-${OPENJDK_VERSION}-alpine" AS builder
 
 WORKDIR /build
 COPY ./src ./src
@@ -26,7 +26,7 @@ FROM --platform=${TARGETPLATFORM} "docker.io/library/alpine:${ALPINE_VERSION}"
 ARG OPENJDK_VERSION
 
 WORKDIR /app
-RUN apk add --no-cache openjdk17
+RUN apk add --no-cache openjdk21-jre-headless
 
 WORKDIR /app
 
