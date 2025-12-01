@@ -1,4 +1,4 @@
-package com.zazuko.spatialindexer;
+package com.zazuko.apps.spatialindexer;
 
 import java.io.File;
 
