@@ -1,0 +1,16 @@
+{
+  "name": "spatial-indexer",
+  "version": "0.2.2",
+  "description": "Generate a spatial index file from a TDB2 dataset",
+  "main": "index.js",
+  "repository": "git@github.com:zazuko/spatial-indexer.git",
+  "author": "Zazuko GmbH",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "release": "changeset tag"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.29.8"
+  }
+}
