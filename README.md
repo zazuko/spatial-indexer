@@ -13,6 +13,33 @@ Build the package using the following command:
 mvn clean package
 ```
 
+## Test
+
+The unit tests cover the option parsing and the index building itself, against small TDB2 datasets built on the fly. They need no Docker and are run with:
+
+```sh
+mvn test
+```
+
+The integration tests generate a small RDF dataset with geometries, load it into a TDB2 dataset with the Apache Jena CLI tools, build the spatial index with this tool, and then serve the result with [Fuseki with GeoSPARQL support](https://github.com/zazuko/fuseki-geosparql) to check that it starts without error and answers GeoSPARQL queries as expected.
+
+They need `docker`, `java` and `mvn` available, and are run with:
+
+```sh
+pnpm install
+pnpm run test
+```
+
+The jar is built automatically when it is missing or out of date, and the Apache Jena CLI tools are downloaded once into `test/.cache/`.
+
+The test suite is written in TypeScript and runs straight from source: Node strips the types, so there is no build step. It is linted and formatted with [oxc](https://oxc.rs):
+
+```sh
+pnpm run typecheck    # tsc --noEmit
+pnpm run lint         # oxlint  (pnpm run lint:fix to apply fixes)
+pnpm run format       # oxfmt   (pnpm run format:check to only verify)
+```
+
 ## Run the tool
 
 Once you built the package, you can run the spatial indexer tool by using this command:

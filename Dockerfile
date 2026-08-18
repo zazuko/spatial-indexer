@@ -1,8 +1,8 @@
-# syntax=docker/dockerfile:1.2
+# syntax=docker/dockerfile:1
 
 # manage base versions
-ARG ALPINE_VERSION="3.22.2"
-ARG MAVEN_VERSION="3.9.11"
+ARG ALPINE_VERSION="3.24.1"
+ARG MAVEN_VERSION="3.9.16"
 ARG OPENJDK_VERSION="21"
 
 
@@ -26,9 +26,7 @@ FROM --platform=${TARGETPLATFORM} "docker.io/library/alpine:${ALPINE_VERSION}"
 ARG OPENJDK_VERSION
 
 WORKDIR /app
-RUN apk add --no-cache openjdk21-jre-headless
-
-WORKDIR /app
+RUN apk add --no-cache "openjdk${OPENJDK_VERSION}-jre-headless"
 
 COPY --from=builder /build/spatialindexer.jar .
 COPY entrypoint.sh .
