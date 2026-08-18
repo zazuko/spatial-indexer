@@ -1,6 +1,6 @@
 {
   "name": "spatial-indexer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Generate a spatial index file from a TDB2 dataset",
   "main": "index.js",
   "type": "module",
