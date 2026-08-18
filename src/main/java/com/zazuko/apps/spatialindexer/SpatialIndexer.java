@@ -66,7 +66,7 @@ public class SpatialIndexer {
         .hasArg(true)
         .required(true)
         .argName("dataset")
-        .build();
+        .get();
 
     final Option spatialIndexFile = Option
         .builder("i")
@@ -75,7 +75,7 @@ public class SpatialIndexer {
         .hasArg(true)
         .required(true)
         .argName("index")
-        .build();
+        .get();
 
     final Option srsUri = Option
         .builder("s")
@@ -84,7 +84,7 @@ public class SpatialIndexer {
         .hasArg(true)
         .required(false)
         .argName("srs")
-        .build();
+        .get();
 
     final Options options = new Options();
     options
