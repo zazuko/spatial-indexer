@@ -15,6 +15,12 @@ mvn clean package
 
 ## Test
 
+The unit tests cover the option parsing and the index building itself, against small TDB2 datasets built on the fly. They need no Docker and are run with:
+
+```sh
+mvn test
+```
+
 The integration tests generate a small RDF dataset with geometries, load it into a TDB2 dataset with the Apache Jena CLI tools, build the spatial index with this tool, and then serve the result with [Fuseki with GeoSPARQL support](https://github.com/zazuko/fuseki-geosparql) to check that it starts without error and answers GeoSPARQL queries as expected.
 
 They need `docker`, `java` and `mvn` available, and are run with:

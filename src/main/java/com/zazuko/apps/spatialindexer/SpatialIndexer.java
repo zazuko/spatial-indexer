@@ -26,7 +26,7 @@ public class SpatialIndexer {
    * @param spatialIndexFile
    * @throws SpatialIndexException
    */
-  private static final void setupSpatialIndexWithoutSrsUri(Dataset dataset, File spatialIndexFile)
+  static final void setupSpatialIndexWithoutSrsUri(Dataset dataset, File spatialIndexFile)
       throws SpatialIndexException {
     try {
       GeoSPARQLConfig.setupSpatialIndex(dataset, spatialIndexFile.toPath());
@@ -37,11 +37,28 @@ public class SpatialIndexer {
   }
 
   /**
+   * Build the spatial index for a dataset and write it to a file.
+   *
+   * @param dataset          the dataset to index
+   * @param spatialIndexFile the file to write the spatial index to
+   * @param srsUri           the SRS URI to use, or null to detect it from the dataset
+   * @throws SpatialIndexException
+   */
+  static final void buildSpatialIndex(Dataset dataset, File spatialIndexFile, String srsUri)
+      throws SpatialIndexException {
+    if (srsUri == null) {
+      setupSpatialIndexWithoutSrsUri(dataset, spatialIndexFile);
+    } else {
+      GeoSPARQLConfig.setupSpatialIndex(dataset, srsUri, spatialIndexFile.toPath());
+    }
+  }
+
+  /**
    * Manage supported options.
    *
    * @return Options
    */
-  private static final Options configParameters() {
+  static final Options configParameters() {
     final Option dataset = Option
         .builder("d")
         .longOpt("dataset")
@@ -98,12 +115,7 @@ public class SpatialIndexer {
     final Dataset dataset = TDB2Factory.connectDataset(datasetPath);
 
     try {
-      if (line.hasOption("srs")) {
-        final String srsUri = line.getOptionValue("srs");
-        GeoSPARQLConfig.setupSpatialIndex(dataset, srsUri, spatialIndexFile.toPath());
-      } else {
-        setupSpatialIndexWithoutSrsUri(dataset, spatialIndexFile);
-      }
+      buildSpatialIndex(dataset, spatialIndexFile, line.getOptionValue("srs"));
     } catch (SpatialIndexException e) {
       System.err.println(e);
       System.exit(EXIT_FAILURE);
