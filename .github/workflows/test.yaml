@@ -6,7 +6,31 @@ on:
       - "**"
 
 jobs:
+  checks:
+    name: Lint, format and types
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@v2
+        with:
+          runtime: node@lts
+          cache: true
+
+      - name: Check formatting
+        run: pnpm run format:check
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Check types
+        run: pnpm run typecheck
+
   tests:
+    name: Integration tests
     runs-on: ubuntu-latest
 
     steps:

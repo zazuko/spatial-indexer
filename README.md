@@ -26,6 +26,14 @@ pnpm run test
 
 The jar is built automatically when it is missing or out of date, and the Apache Jena CLI tools are downloaded once into `test/.cache/`.
 
+The test suite is written in TypeScript and runs straight from source: Node strips the types, so there is no build step. It is linted and formatted with [oxc](https://oxc.rs):
+
+```sh
+pnpm run typecheck    # tsc --noEmit
+pnpm run lint         # oxlint  (pnpm run lint:fix to apply fixes)
+pnpm run format       # oxfmt   (pnpm run format:check to only verify)
+```
+
 ## Run the tool
 
 Once you built the package, you can run the spatial indexer tool by using this command:
