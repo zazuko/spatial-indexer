@@ -7,6 +7,10 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     name: Release
@@ -29,20 +33,18 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.app-token.outputs.token }}
 
-      - uses: actions/setup-node@v7
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@v2
         with:
-          node-version: "lts/*"
-
-      - name: Install Dependencies
-        run: yarn
+          runtime: node@lts
+          cache: true
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
+          github-token: ${{ steps.app-token.outputs.token }}
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: yarn release
-          commit: "chore: release"
-          title: "Merge to release"
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          publish-script: pnpm run release
+          commit-message: "chore: release"
+          pr-title: "Merge to release"
