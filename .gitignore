@@ -28,3 +28,7 @@ target/
 
 node_modules/
 .DS_Store
+
+# test artifacts
+test/.cache/
+test/.tmp/

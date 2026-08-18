@@ -1,0 +1,37 @@
+name: Run tests
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Set up pnpm and Node.js
+        uses: pnpm/setup@v2
+        with:
+          runtime: node@lts
+          cache: true
+
+      # The Apache Jena CLI tools are downloaded once and reused across runs
+      - name: Cache Apache Jena CLI tools
+        uses: actions/cache@v6
+        with:
+          path: test/.cache
+          key: jena-${{ hashFiles('pom.xml') }}
+
+      - name: Run tests
+        run: pnpm run test
