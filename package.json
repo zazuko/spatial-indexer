@@ -22,7 +22,7 @@
     "@changesets/cli": "^3.0.2",
     "@types/node": "^26.6.1",
     "oxfmt": "^0.67.0",
-    "oxlint": "^1.82.0",
+    "oxlint": "^1.83.0",
     "typescript": "^7.0.2"
   }
 }
