@@ -7,7 +7,7 @@ If you want to play with Fuseki with GeoSPARQL support, you may be interested in
 
 ## Build
 
-Build the package using the following command:
+Building the package requires Java 25 or later. Build it using the following command:
 
 ```sh
 mvn clean package
@@ -23,7 +23,7 @@ mvn test
 
 The integration tests generate a small RDF dataset with geometries, load it into a TDB2 dataset with the Apache Jena CLI tools, build the spatial index with this tool, and then serve the result with [Fuseki with GeoSPARQL support](https://github.com/zazuko/fuseki-geosparql) to check that it starts without error and answers GeoSPARQL queries as expected.
 
-They need `docker`, `java` and `mvn` available, and are run with:
+They need `docker`, `java` (25 or later) and `mvn` available, and are run with:
 
 ```sh
 pnpm install
@@ -91,7 +91,7 @@ FROM ...
 
 # ...
 
-# make sure you have a Java runtime somewhere in the image
+# make sure you have a Java 25 (or later) runtime somewhere in the image
 
 # ...
 COPY --from=ghcr.io/zazuko/spatial-indexer:latest /app/spatialindexer.jar .
