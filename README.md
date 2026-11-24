@@ -62,7 +62,7 @@ Supported options:
 
 The Docker image is configurable using the following environment variables:
 
-- `JAVA_OPTIONS`: add some Java options (default: _empty_)
+- `JAVA_OPTIONS`: add some Java options, for example `-Xmx4g` (default: _empty_)
 - `SRS_URI`: specify a SRS URI to use (default: _empty_)
 - `DATASET_PATH`: path to the dataset (default: `/databases/ds`)
 - `SPATIAL_INDEX_FILE_PATH`: path to the spatial index file to generate (default: `/databases/ds/spatial.index`)
