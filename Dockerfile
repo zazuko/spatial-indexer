@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # manage base versions
-ARG ALPINE_VERSION="3.24.1"
+ARG ALPINE_VERSION="3.24.4"
 ARG MAVEN_VERSION="3.9.16"
 ARG OPENJDK_VERSION="25"
 
