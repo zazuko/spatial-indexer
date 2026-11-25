@@ -1,5 +1,32 @@
 # spatial-indexer
 
+## 0.5.0
+
+### Minor Changes
+
+- 39b9342: Upgrade OpenJDK from version 21 to version 25.
+
+  The jar is now compiled for Java 25, so images that copy
+  `/app/spatialindexer.jar` out of `ghcr.io/zazuko/spatial-indexer` need a
+  Java 25 (or later) runtime to run it.
+
+### Patch Changes
+
+- b02a02e: Fix the `JAVA_OPTIONS` environment variable of the Docker image being ignored.
+
+  The image documents `JAVA_OPTIONS` to pass options to the JVM (for example
+  `-Xmx4g` to give it more memory on a large dataset), but the entrypoint only
+  read `JAVA_OPTS`, so any value set in `JAVA_OPTIONS` was silently dropped. The
+  entrypoint now passes `JAVA_OPTIONS` to the JVM.
+
+  `JAVA_OPTS` keeps working, so setups that relied on it are not affected. When
+  both are set, both are passed to the JVM, and `JAVA_OPTIONS` takes precedence
+  if they set the same option.
+
+- 42f042f: Upgrade Alpine base image from 3.24.1 to 3.24.4
+- 4be7f6a: Upgrade Apache Jena from 6.2.0 to 6.3.0.
+- 7bc1511: Build the Docker image with Maven 3.10.0 instead of 3.9.16
+
 ## 0.4.0
 
 ### Minor Changes
